@@ -78,9 +78,9 @@ This project focuses on analyzing **Foreign Tourist Arrivals (FTAs)** in India f
 ---
 
 ## 🖼️ Sample Visualizations
-![Heatmap Example](assets/heatmap.png)  
-![FTA Trends](assets/fta_trends.png)  
-*(Add generated plots/screenshots in the `assets/` folder)*  
+![Heatmap Example]<img width="1245" height="897" alt="image" src="https://github.com/user-attachments/assets/ac9a5ea8-3edd-469e-b5b2-9179f4ecc87c" />
+ 
+![FTA Trends]<img width="1001" height="547" alt="image" src="https://github.com/user-attachments/assets/a95e8de3-c602-4983-8f27-1e02f359ab11" />
 
 ---
 
