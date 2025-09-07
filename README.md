@@ -78,9 +78,9 @@ This project focuses on analyzing **Foreign Tourist Arrivals (FTAs)** in India f
 ---
 
 ## 🖼️ Sample Visualizations
-![Heatmap Example]<img width="1245" height="897" alt="image" src="https://github.com/user-attachments/assets/ac9a5ea8-3edd-469e-b5b2-9179f4ecc87c" />
+**Heatmap Example**<img width="1245" height="897" alt="image" src="https://github.com/user-attachments/assets/ac9a5ea8-3edd-469e-b5b2-9179f4ecc87c" />
  
-![FTA Trends]<img width="1001" height="547" alt="image" src="https://github.com/user-attachments/assets/a95e8de3-c602-4983-8f27-1e02f359ab11" />
+**FTA Trends**<img width="1001" height="547" alt="image" src="https://github.com/user-attachments/assets/a95e8de3-c602-4983-8f27-1e02f359ab11" />
 
 ---
 
@@ -88,15 +88,7 @@ This project focuses on analyzing **Foreign Tourist Arrivals (FTAs)** in India f
 - Improve predictions with **advanced ML/DL models** (e.g., LSTM for time series).  
 - Expand dataset with **domestic tourism** insights.  
 - Build an **interactive dashboard** using Power BI / Streamlit.  
-
----
-
-## 👨‍💻 Contributors
-- **Dishant Patel (202201260)** – BTech ICT  
-- **Madhav Kanjilimadom (202203018)** – BTech MnC  
-- **Shravan Kakadiya (202201333)** – BTech ICT  
-
-📖 Under the guidance of **Prof. Gopinath Panda**, DA-IICT Gandhinagar  
+ 
 
 ---
 
