@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Tourism Analysis 2001-2023</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #576574;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .chart-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .chart-card.animate {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border: 2px dashed #6c757d;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .chart-placeholder-text {
+            color: #6c757d;
+            font-size: 1.1rem;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .interpretation {
+            font-size: 1.1rem;
+            color: #495057;
+            font-style: italic;
+            text-align: center;
+            padding: 15px;
+            background: rgba(108, 117, 125, 0.05);
+            border-left: 4px solid #667eea;
+            border-radius: 0 10px 10px 0;
+            margin-top: 10px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .chart-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;  /* centers the image */
+    object-fit: contain; /* ensures it fits without cropping */
+}
+
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #764ba2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .chart-card {
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Exploratory Data Analysis of Indian Tourism (2001–2023)</h1>
+            <p>A comprehensive analysis of Foreign Tourist Arrivals (FTAs) and their economic impact on India's tourism sector. This study examines trends, patterns, and projections across two decades, revealing insights into regional preferences, seasonal variations, and the correlation between tourist arrivals and foreign exchange earnings.</p>
+        </div>
+
+        <!-- Key Statistics -->
+        <div class="stats-section">
+            <h2 style="text-align: center; color: #2c3e50; margin-bottom: 10px;">Key Insights</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Years Analyzed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85+</div>
+                    <div class="stat-label">Countries Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Q4</div>
+                    <div class="stat-label">Peak Tourism Season</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25-54</div>
+                    <div class="stat-label">Primary Age Group</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <!-- Regional Distribution -->
+            <div class="chart-card">
+                <h3 class="chart-title">Distribution of Regions of Origins for FTAs</h3>
+                <div class="chart-image">
+                    <img src="images/regional_distribution.png" alt="Regional Distribution Chart" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/regional_distribution.png</span></div>'">
+                </div>
+                <div class="interpretation">Western Europe and West Asia dominate India's tourism landscape, contributing the largest share of foreign visitors.</div>
+            </div>
+
+            <!-- Age Group Distribution -->
+            <div class="chart-card">
+                <h3 class="chart-title">Distribution of FTAs by Age Groups</h3>
+                <div class="chart-image">
+                    <img src="images/age_distribution.png" alt="Age Group Distribution Chart" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/age_distribution.png</span></div>'">
+                </div>
+                <div class="interpretation">Middle-aged adults (25-54 years) represent the largest demographic of tourists visiting India, reflecting higher travel frequency and disposable income.</div>
+            </div>
+
+            <!-- Quarterly Trends -->
+            <div class="chart-card">
+                <h3 class="chart-title">Quarterly Distribution of 21st Century FTAs</h3>
+                <div class="chart-image">
+                    <img src="images/quarterly_trends.png" alt="Quarterly Trends Chart" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/quarterly_trends.png</span></div>'">
+                </div>
+                <div class="interpretation">Tourist arrivals peak dramatically in Q4 (October-December), showcasing strong seasonal demand patterns driven by favorable weather and festivals.</div>
+            </div>
+
+            <!-- Regional Trends -->
+            <div class="chart-card">
+                <h3 class="chart-title">FTA Trends by Region</h3>
+                <div class="chart-image">
+                    <img src="images/regional_trends.png" alt="Regional Trends Over Time" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/regional_trends.png</span></div>'">
+                </div>
+                <div class="interpretation">All regions show steady growth until 2020, when COVID-19 caused a sharp decline, followed by gradual recovery in subsequent years.</div>
+            </div>
+
+            <!-- Missing Data Analysis -->
+            <div class="chart-card">
+                <h3 class="chart-title">Missing Data Pattern Analysis</h3>
+                <div class="chart-image">
+                    <img src="images/missing_data.png" alt="Missing Data Visualization" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/missing_data.png</span></div>'">
+                </div>
+                <div class="interpretation">Missing data shows a systematic pattern, primarily concentrated in recent years (2017-2021) for specific countries.</div>
+            </div>
+
+            <!-- Outlier Analysis -->
+            <div class="chart-card">
+                <h3 class="chart-title">FTA Outlier Detection Analysis</h3>
+                <div class="chart-image">
+                    <img src="images/outlier_analysis.png" alt="Outlier Detection Boxplots" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/outlier_analysis.png</span></div>'">
+                </div>
+                <div class="interpretation">Consistent outliers represent countries with exceptionally high tourist arrivals, particularly from neighboring regions with visa-free access.</div>
+            </div>
+
+            <!-- Correlation Analysis -->
+            <div class="chart-card full-width">
+                <h3 class="chart-title">Correlation Heatmap of FTA Data</h3>
+                <div class="chart-image">
+                    <img src="images/correlation_heatmap.png" alt="Correlation Matrix Heatmap" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/correlation_heatmap.png</span></div>'">
+                </div>
+                <div class="interpretation">Strong positive correlations across years indicate consistent growth patterns and temporal dependencies in tourism data.</div>
+            </div>
+
+            <!-- FTA vs Tourism Share -->
+            <div class="chart-card">
+                <h3 class="chart-title">FTAs vs India's Global Tourism Share</h3>
+                <div class="chart-image">
+                    <img src="images/fta_vs_share.png" alt="FTA vs Market Share Scatter Plot" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/fta_vs_share.png</span></div>'">
+                </div>
+                <div class="interpretation">Higher foreign tourist arrivals directly translate to increased global tourism market share for India, demonstrating sector competitiveness.</div>
+            </div>
+
+            <!-- FTA vs Global Rank -->
+            <div class="chart-card">
+                <h3 class="chart-title">FTAs vs India's Global Tourism Rank</h3>
+                <div class="chart-image">
+                    <img src="images/fta_vs_rank.png" alt="FTA vs Global Rank Chart" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/fta_vs_rank.png</span></div>'">
+                </div>
+                <div class="interpretation">As tourist arrivals increase, India achieves better rankings in global tourism competitiveness indices.</div>
+            </div>
+
+            <!-- FEE vs Tourism Share -->
+            <div class="chart-card">
+                <h3 class="chart-title">Foreign Exchange Earnings vs Tourism Share</h3>
+                <div class="chart-image">
+                    <img src="images/fee_vs_share.png" alt="FEE vs Market Share Chart" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/fee_vs_share.png</span></div>'">
+                </div>
+                <div class="interpretation">Foreign exchange earnings from tourism show strong positive correlation with India's global tourism market share.</div>
+            </div>
+
+            <!-- FEE vs Global Rank -->
+            <div class="chart-card">
+                <h3 class="chart-title">Foreign Exchange Earnings vs Global Rank</h3>
+                <div class="chart-image">
+                    <img src="images/fee_vs_rank.png" alt="FEE vs Rank Chart" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/fee_vs_rank.png</span></div>'">
+                </div>
+                <div class="interpretation">Higher foreign exchange earnings consistently align with better global tourism rankings, indicating economic impact.</div>
+            </div>
+
+            <!-- World Map Choropleth -->
+            <div class="chart-card full-width">
+                <h3 class="chart-title">Global Distribution of Tourist Origins</h3>
+                <div class="chart-image">
+                    <img src="images/world_map.png" alt="World Choropleth Map" 
+                         onerror="this.parentElement.innerHTML='<div class=\'chart-placeholder\'><span class=\'chart-placeholder-text\'>Add: images/world_map.png</span></div>'">
+                </div>
+                <div class="interpretation">The global map reveals concentrated tourist flows from Western Europe, West Asia, and North America, highlighting key target markets for India's tourism strategy.</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Data Analysis Project • 2001-2023 Indian Tourism Study</p>
+            <p>Source: <a href="https://data.gov.in" target="_blank">data.gov.in</a> | 
+            GitHub: <a href="https://github.com/spidermanMJ17/Data_Analysis_Project" target="_blank">View Project Repository</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                }
+            });
+        }, observerOptions);
+
+        // Observe all chart cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const chartCards = document.querySelectorAll('.chart-card');
+            chartCards.forEach(card => observer.observe(card));
+            
+            // Add staggered animation delays
+            chartCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Smooth scroll behavior for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add subtle parallax effect to header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            const rate = scrolled * -0.5;
+            header.style.transform = `translateY(${rate}px)`;
+        });
+
+        // Add hover effects for stat cards
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
