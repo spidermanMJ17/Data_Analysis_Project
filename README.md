@@ -3,6 +3,11 @@
 This project focuses on analyzing **Foreign Tourist Arrivals (FTAs)** in India from **2001 to 2023** and exploring their **economic impact** through **Foreign Exchange Earnings (FEE)**. By performing Exploratory Data Analysis (EDA), we identified patterns, trends, and future projections that contribute to India’s global tourism competitiveness.
 
 ---
+![Python](https://img.shields.io/badge/Python-3.9-blue)  
+![License](https://img.shields.io/badge/License-MIT-green)  
+![EDA](https://img.shields.io/badge/Project-EDA-yellow)
+
+---
 
 ## 📌 Project Overview
 - 📊 Conducted an in-depth EDA on multiple datasets from [data.gov.in](https://data.gov.in).
